@@ -18,9 +18,7 @@ end
 soma = 0
 File.foreach("AdventOfCode1DayInput.txt") {
     |line|
-    puts line
     tratamento(line)
-    puts line
     linha = line.chars
     first = nil
     last = nil
@@ -32,7 +30,6 @@ File.foreach("AdventOfCode1DayInput.txt") {
             end
         end
     end
-    puts first + last
     soma += (first + last).to_i
 }
 
