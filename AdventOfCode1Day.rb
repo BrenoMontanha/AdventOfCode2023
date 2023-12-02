@@ -15,22 +15,22 @@ def tratamento(str)
     str.gsub!(/\D/, "")
 end
 
-soma = 0
+sum = 0
 File.foreach("AdventOfCode1DayInput.txt") {
     |line|
     tratamento(line)
-    linha = line.chars
+    chars_of_line = line.chars
     first = nil
     last = nil
-    linha.each do |letra|
-        if(number?(letra))
-            last = letra
+    chars_of_line.each do |letter|
+        if(number?(letter))
+            last = letter
             if(first.nil?)
-                first = letra;
+                first = letter;
             end
         end
     end
-    soma += (first + last).to_i
+    sum += (first + last).to_i
 }
 
-puts soma
+puts sum
