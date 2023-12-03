@@ -16,7 +16,7 @@ def tratamento(str)
 end
 
 sum = 0
-File.foreach("AdventOfCode1DayInput.txt") {
+File.foreach("Day01/Input.txt") {
     |line|
     tratamento(line)
     chars_of_line = line.chars

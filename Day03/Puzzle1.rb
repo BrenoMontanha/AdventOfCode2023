@@ -52,8 +52,7 @@ class SymbolAndPosition
         if(number.line > (@line + 1))
             break
         end
-        if((@position-1..position+1).cover?(number.last)||(@position-1..@position+1).cover?(number.first))
-            p "Linha: #{@line} #{@position} entre #{number.first} e #{number.last}  Numero: #{number.value}"
+        if(some_in_interval((@position-1..@position+1),(number.first..number.last)))
             number.sumable(true)
         end
     }
@@ -68,18 +67,29 @@ class SymbolAndPosition
   end
 end
 
+def some_in_interval(interval, r1)
+  arr = r1.to_a
+  arr.each{
+    |pos|
+    if(interval.cover?(pos))
+        return true
+    end
+  }
+  false
+end
+
 def number?(str)
     !!(str =~ /\d/)
 end
 
 def symbol?(str)
-    !!!(str =~ /\W?^\./)
+    not (("0".."9").cover? str or str =~ /[\.\n]/)
 end
 
 arrn = []
 arrs = []
 
-File.foreach("AdventOfCode3DayInput.txt").with_index{
+File.foreach("Day03/Input.txt").with_index{
     |line, indexl|
     chars = line.split('')
     number = ""
@@ -98,10 +108,11 @@ File.foreach("AdventOfCode3DayInput.txt").with_index{
             firstp = nil
             number = ""
             lastp = nil
-        else if(symbol?(char))
+        
+        end
+        end
+        if(symbol?(char))
             arrs << (SymbolAndPosition.new(char, index, indexl))
-        end
-        end
         end
     }
 }
